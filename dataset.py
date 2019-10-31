@@ -10,7 +10,12 @@ class suny_international:
     """
     
     """
+    atmospheric_factors = ('Cloud Type', 'Dew Point', 'Temperature', 'Pressure',
+       'Relative Humidity', 'Solar Zenith Angle', 'Precipitable Water',
+       'Wind Direction', 'Wind Speed', 'Fill Flag')
 
+    test_year =2013
+    
     @staticmethod
     def load_data (start='08:00:00',end='18:00:00'):
         df = pd.read_csv('data/suny_international/full_data.csv',
@@ -20,6 +25,11 @@ class suny_international:
         df = df.iloc[:, :16]
         df = df.between_time(start, end)
         return df
+    
+    @staticmethod
+    def train_test_split(df):
+        df_train,df_test = df[df.index.year!=2013],df[df.index.year==2013]
+        return df_train,df_test
 
 
 class hi_seas:
