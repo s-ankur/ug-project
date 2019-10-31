@@ -33,7 +33,7 @@ def plot_daily(*dfs, save=None, index=None):
         time_text.set_text(df[0][0].strftime("%b %Y"))
         return lines + [time_text]
 
-    anim = animation.FuncAnimation(fig, update, frames=zip(*df_days), init_func=init, blit=True, interval=20)
+    anim = animation.FuncAnimation(fig, update, frames=zip(*df_days), init_func=init, blit=True, interval=50)
     if save is not None:
         anim.save(save)
     plt.show()
