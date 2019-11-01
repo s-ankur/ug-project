@@ -2,7 +2,7 @@ import numpy as np
 
 from dataset import suny_international
 from animate import plot_daily
-
+from utility import split_sequence
 from keras.models import load_model
 
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     model = load_model('models/simple_dnn_daily.h5')
     y_pred = model.predict(X)
     plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_daily.mp4', index=df_test.index)
-    
+
     X=np.array([df_test.index.minute+df_test.index.hour*60,df_test.index.month]).T
     y=np.array(df_test['GHI'])
     model = load_model('models/simple_dnn_monthly.h5')
@@ -31,10 +31,8 @@ if __name__ == "__main__":
     y_pred = model.predict(X)
     plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_atmoshperic.mp4', index=df_test.index)
 
-    X, y = split_sequence(df_test, n_steps)
+    X, y = split_sequence(df_test, 20)
     X = X.reshape((X.shape[0], X.shape[1], n_features))
     model = load_model('models/simple_rnn.h5')
     y_pred = model.predict(X)
     plot_daily(y ,y_pred.ravel(),save='media/simple_rnn.mp4', index=df_test.index)
-
-
