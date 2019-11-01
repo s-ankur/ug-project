@@ -17,13 +17,12 @@ class suny_international:
     test_year =2013
     
     @staticmethod
-    def load_data (start='08:00:00',end='18:00:00'):
+    def load_data ():
         df = pd.read_csv('data/suny_international/full_data.csv',
                          skiprows=2, parse_dates=[['Year', 'Month', 'Day', 'Hour', 'Minute']],
                          index_col=0, date_parser=lambda x: datetime.strptime(x, '%Y %m %d %H %M'))
         df.index.name = 'date'
         df = df.iloc[:, :16]
-        df = df.between_time(start, end)
         return df
     
     @staticmethod

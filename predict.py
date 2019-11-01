@@ -30,3 +30,11 @@ if __name__ == "__main__":
     model = load_model('models/simple_dnn_atmospheric.h5')
     y_pred = model.predict(X)
     plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_atmoshperic.mp4', index=df_test.index)
+
+    X, y = split_sequence(df_test, n_steps)
+    X = X.reshape((X.shape[0], X.shape[1], n_features))
+    model = load_model('models/simple_rnn.h5')
+    y_pred = model.predict(X)
+    plot_daily(y ,y_pred.ravel(),save='media/simple_rnn.mp4', index=df_test.index)
+
+
