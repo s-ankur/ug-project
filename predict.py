@@ -9,7 +9,7 @@ from keras.models import load_model
 if __name__ == "__main__":
 
     df=suny_international.load_data()
-    plot_daily(df['GHI',save='media/GHI.mp4', index=df.index)
+    plot_daily(df['GHI'],save='media/GHI.mp4', index=df.index)
     df_train,df_test = suny_international.train_test_split(df)
     
     X=np.array(df_test.index.minute+df_test.index.hour*60).reshape(-1,1)
