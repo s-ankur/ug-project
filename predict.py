@@ -1,9 +1,14 @@
 import numpy as np
+import warnings
+import tensorflow as tf
 
 from dataset import suny_international
 from animate import plot_daily
 from utility import split_sequence
 from keras.models import load_model
+
+warnings.filterwarnings("ignore")
+tf.get_logger().setLevel('ERROR')
 
 
 if __name__ == "__main__":
@@ -29,10 +34,12 @@ if __name__ == "__main__":
     y=np.array(df_test['GHI'])
     model = load_model('models/simple_dnn_atmospheric.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_atmoshperic.mp4', index=df_test.index)
+    plot_daily(y[] ,y_pred.ravel(),save='media/simple_dnn_atmoshperic.mp4', index=df_test.index)
 
-    X, y = split_sequence(df_test, 20)
+    n_features = 1
+    n_steps = 20 
+    X, y = split_sequence(df_test['GHI'], n_steps)
     X = X.reshape((X.shape[0], X.shape[1], n_features))
     model = load_model('models/simple_rnn.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_rnn.mp4', index=df_test.index)
+    plot_daily(y ,y_pred.ravel(),save='media/simple_rnn.mp4', index=df_test.index[n_steps:])
