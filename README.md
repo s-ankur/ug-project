@@ -1,5 +1,5 @@
-# UG-PROJECT
-Solar Power Forecasting
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+# UG-PROJECT : Solar Power Forecasting
 Solar irradiation is one of the major renewable energy sources and technologies related with this source have reached to high level
 applications. Prediction of solar irradiation shows some uncertainties depending on atmospheric parameters such as temperature, cloud
 amount, dust and relative humidity. These conditions add new uncertainties to the prediction of this astronomical parameter. In this
