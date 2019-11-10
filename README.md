@@ -13,3 +13,15 @@ prediction methods can be employed. Such models forecast the
 source availability and estimate the expected energy intake,
 allowing the system to take critical decisions about the utiliza-
 tion of the available energy. In this work, we present a novel
+
+## Dataset:
+Most of our work is done on the suny_international dataset.It contains the following columns<br>
+'DHI', 'DNI', 'GHI', 'Clearsky DHI', 'Clearsky DNI', 'Clearsky GHI',
+       'Cloud Type', 'Dew Point', 'Temperature', 'Pressure',
+       'Relative Humidity', 'Solar Zenith Angle', 'Precipitable Water',
+       'Wind Direction', 'Wind Speed', 'Fill Flag'<br>
+The readings are available at the interval of 30 min with most of the radiation being concentrated between 06:00 and 18:00.
+
+
+## Analysis:
+Before we begin with the prediction and modelling, we need to first analyze the data which we have obtained. The following graphic shows the variation of the daily GHI per day.
