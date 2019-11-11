@@ -19,25 +19,36 @@ if __name__ == "__main__":
     y=np.array(df_test['GHI'])
     model = load_model('models/simple_dnn_daily.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_daily.mp4', index=df_test.index)
+    anim=plot_daily(y ,y_pred.ravel(), index=df_test.index)
+    plt.show()
+    anim.save('media/simple_dnn_daily.mp4')
 
     X=np.array([df_test.index.minute+df_test.index.hour*60,df_test.index.month]).T
     y=np.array(df_test['GHI'])
     model = load_model('models/simple_dnn_monthly.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_monthly.mp4', index=df_test.index)
+    anim=plot_daily(y ,y_pred.ravel(), index=df_test.index)
+    plt.show()
+    anim.save('media/simple_dnn_monthly.mp4')
 
     X=np.array([df_test.index.minute+df_test.index.hour*60, df_test.index.month,
             *(df_test[factor] for factor in suny_international.atmospheric_factors)]).T
     y=np.array(df_test['GHI'])
     model = load_model('models/simple_dnn_atmospheric.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_dnn_atmoshperic.mp4', index=df_test.index)
-
-    n_features = 1
+    anim=plot_daily(y ,y_pred.ravel(), index=df_test.index)
+    plt.show()
+    anim.save('media/simple_dnn_atmoshperic.mp4')
+    
     n_steps = 20 
+    n_features = 1
     X, y = split_sequence(df_test['GHI'], n_steps)
     X = X.reshape((X.shape[0], X.shape[1], n_features))
     model = load_model('models/simple_rnn.h5')
     y_pred = model.predict(X)
-    plot_daily(y ,y_pred.ravel(),save='media/simple_rnn.mp4', index=df_test.index[n_steps:])
+    plot_daily(y ,y_pred.ravel(), index=df_test.index[n_steps:])
+    plt.show()
+    anim.save('media/simple_rnn.mp4')
+
+    n_steps=20
+    n_features= len(suny_international.atmospheric_factors)
