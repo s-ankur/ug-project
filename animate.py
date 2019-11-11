@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 plt.rcParams["figure.figsize"] = (20, 3)
 
 
-def plot_daily(*dfs, index=None):
+def plot_daily(*dfs, index=None, save =None):
     if index is not None:
         dfs = [pd.Series(df, index=index) for df in dfs]
     plt.ioff()
