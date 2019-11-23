@@ -10,25 +10,39 @@ class suny_international:
     """
     
     """
-    atmospheric_factors = ('Cloud Type', 'Dew Point', 'Temperature', 'Pressure',
-       'Relative Humidity', 'Solar Zenith Angle', 'Precipitable Water',
-       'Wind Direction', 'Wind Speed', 'Fill Flag')
 
-    test_year =2013
-    
+    atmospheric_factors = (
+        "Cloud Type",
+        "Dew Point",
+        "Temperature",
+        "Pressure",
+        "Relative Humidity",
+        "Solar Zenith Angle",
+        "Precipitable Water",
+        "Wind Direction",
+        "Wind Speed",
+        "Fill Flag",
+    )
+
+    test_year = 2013
+
     @staticmethod
-    def load_data ():
-        df = pd.read_csv('data/suny_international/full_data.csv',
-                         skiprows=2, parse_dates=[['Year', 'Month', 'Day', 'Hour', 'Minute']],
-                         index_col=0, date_parser=lambda x: datetime.strptime(x, '%Y %m %d %H %M'))
-        df.index.name = 'date'
+    def load_data():
+        df = pd.read_csv(
+            "data/suny_international/full_data.csv",
+            skiprows=2,
+            parse_dates=[["Year", "Month", "Day", "Hour", "Minute"]],
+            index_col=0,
+            date_parser=lambda x: datetime.strptime(x, "%Y %m %d %H %M"),
+        )
+        df.index.name = "date"
         df = df.iloc[:, :16]
         return df
-    
+
     @staticmethod
     def train_test_split(df):
-        df_train,df_test = df[df.index.year!=2013],df[df.index.year==2013]
-        return df_train,df_test
+        df_train, df_test = df[df.index.year != 2013], df[df.index.year == 2013]
+        return df_train, df_test
 
 
 class hi_seas:
@@ -58,9 +72,8 @@ class hi_seas:
 
     """
 
-
     @staticmethod
     def load_data():
-        df = pd.read('data/hi_seas/data.csv')
-        df=df.drop(['UNIXTime','Data','Time','TimeSunRise','TimeSunSet'],axis=1)
+        df = pd.read("data/hi_seas/data.csv")
+        df = df.drop(["UNIXTime", "Data", "Time", "TimeSunRise", "TimeSunSet"], axis=1)
         return df
